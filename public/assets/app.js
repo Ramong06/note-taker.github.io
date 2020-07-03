@@ -1,4 +1,7 @@
-const fs = require('fs');
+const add = (x,y) => {
+    return x+y;
+};
 
-
-fs.appendFileSync('greeting.txt', 'hello world');
+module.exports = {
+    add
+};
