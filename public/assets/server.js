@@ -17,6 +17,15 @@ app.get('/notes', function (req, res) {
     res.sendFile(path.join(__dirname, 'notes.html'));
 });
 
+//Notes Parse
+var notesInput = fs.readFileSync(path.join(__dirname, 'db', 'db.json'));
+var parsedNotes = JSON.parse(notesInput);
+
+//API ROUTE
+app.get('/api/notes', function(req, res){
+
+});
+
 //Index HTML Route
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'index.html'));
