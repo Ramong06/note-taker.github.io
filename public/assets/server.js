@@ -1,33 +1,28 @@
 // Dependencies
 // ===========================================================
 
-var express = require('express');
 var path = require("path");
+var express = require('express');
+var fs = require("fs");
+
 var app = express();
 var PORT = process.env.PORT || 8080;
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
-// YOUR CODE GOES HERE
-
-//
-
-// Routes
-// ===========================================================
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
+//Notes HTML Route
 app.get('/notes', function (req, res) {
     res.sendFile(path.join(__dirname, 'notes.html'));
 });
 
-// app.get('/darthmaul', function (req, res) {
-//     res.json(darthmaul);
-// });
+//Index HTML Route
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
-// Create a new Express route that leads users to the new Obi Wan Kenobi Data
-// Follow the same format as the Yoda and Darth Maul routes
-//
+
 
 // YOUR CODE GOES HERE
 //
