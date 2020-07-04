@@ -1,7 +1,6 @@
 var fs = require("fs");
 var path = require("path");
 var express = require('express');
-var uuid = require('uuidv4');
 
 
 var app = express();
@@ -13,7 +12,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Notes HTML Route
 app.get('/notes', function (req, res) {
-    res.sendFile(path.join(__dirname, 'public', 'notes.html'));
+    res.sendFile(path.join(__dirname, 'notes.html'));
 });
 
 //API ROUTE
@@ -29,24 +28,9 @@ app.get("/api/notes", function (req, res) {
 
 //Index HTML Route
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-//Note Input
-app.post("/api/notes", function (req, res) {
-    var noteInput = req.body;
-    noteInput.id = uuid();
-    notes.push(noteInput);
-    if (noteInput) {
-        fs.writeFile("db.json", JSON.stringify(notes, null, 4), function (err) {
-            if (err) {
-                return console.log(err);
-            }
-            console.log('Well Done');
-        });
-        res.json(noteInput);
-    }
-});
 
 
 // Listener
