@@ -43,6 +43,9 @@ app.post('/api/notes', function (req, res) {
     res.json(notesInput);
 });
 
+//Deletes Notes
+
+
 
 // Listener
 app.listen(PORT, function () {
