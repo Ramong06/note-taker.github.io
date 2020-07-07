@@ -1,10 +1,14 @@
+//Dependencies
 var express = require('express');
 var path = require("path");
 var fs = require("fs");
 
 var app = express();
+
+//Setting Initial Port 
 var PORT = process.env.PORT || 8080;
 
+//Express
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -18,10 +22,9 @@ app.get('/notes', function (req, res) {
 const notesArray = []
 const data = fs.readFileSync(path.join(__dirname, "db", "db.json"));
 
+//Creates New Notes
 app.get("/api/notes", function (req, res) {
-    JSON.parse(data).forEach(note => {
-        notesArray.push(note);
-    });
+    JSON.parse(data).forEach(note => {notesArray.push(note)});
     res.json(notesArray);
 });
 
