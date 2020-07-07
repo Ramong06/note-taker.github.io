@@ -16,8 +16,8 @@ app.get('/notes', function (req, res) {
 });
 
 //API ROUTE
-var notesArray = []
-var data = fs.readFileSync(path.join(__dirname, "db", "db.json"));
+const notesArray = []
+const data = fs.readFileSync(path.join(__dirname, "db", "db.json"));
 
 app.get("/api/notes", function (req, res) {
     JSON.parse(data).forEach(note => {
@@ -27,10 +27,20 @@ app.get("/api/notes", function (req, res) {
 });
 
 //Index HTML Route
-app.get('/', function (req, res) {
+app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.post('/api/notes', function (req, res) {
+    const notesInput = req.body;
+    notesInput.id = notesInput.title.replace(/\s+/g, '');
+    console.log(notesInput);
+
+    const notes = JSON.parse(fs.readFileSync(path.join(__dirname, 'db', 'db.json')));
+    notes.push(notesInput);
+    fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(notes));
+    res.json(notesInput);
+});
 
 
 // Listener
